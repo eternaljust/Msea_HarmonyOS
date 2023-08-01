@@ -1,3 +1,5 @@
+let context = getContext(this);
+
 @Entry
 @Component
 struct Index {
@@ -11,24 +13,24 @@ struct Index {
           .fontSize($r('app.float.text_size_headline6_30_medium'))
           .fontWeight(FontWeight.Medium)
       }
-      .tabBar(this.TabBuilder('虫部落', 0, $r('app.media.ic_public_home_filled_selected'), $r('app.media.ic_public_home_filled')))
+      .tabBar(this.TabBuilder(context.resourceManager.getStringSync($r('app.string.tab_home')), 0, $r("app.media.ic_tab_home_selected"), $r("app.media.ic_tab_home_normal")))
 
       TabContent() {
         Text($r('app.string.tab_notice'))
           .fontSize($r('app.float.text_size_headline6_30_medium'))
           .fontWeight(FontWeight.Medium)
       }
-      .tabBar(this.TabBuilder('通知', 1, $r('app.media.ic_controlcenter_ring_on_filled_selected'), $r('app.media.ic_controlcenter_ring_on_filled')))
+      .tabBar(this.TabBuilder(context.resourceManager.getStringSync($r('app.string.tab_notice')), 1, $r("app.media.ic_tab_profile_selected"), $r("app.media.ic_tab_profile_normal")))
 
       TabContent() {
         Text($r('app.string.tab_profile'))
           .fontSize($r('app.float.text_size_headline6_30_medium'))
       }
-      .tabBar(this.TabBuilder('我的', 2, $r('app.media.ic_public_contacts_filled_selected'), $r('app.media.ic_public_contacts_filled')))
+      .tabBar(this.TabBuilder(context.resourceManager.getStringSync($r('app.string.tab_profile')), 2, $r("app.media.ic_tab_notice_selected"), $r("app.media.ic_tab_notice_normal")))
     }
     .height('100%')
     .onChange((index) => {
-      this.currentIndex = index
+      this.currentIndex = index;
     })
   }
 
@@ -37,7 +39,7 @@ struct Index {
       Image(this.currentIndex === targetIndex ? selectedImg : normalImg)
         .size({ width: 24, height: 24 })
       Text(title)
-        .fontColor(this.currentIndex === targetIndex ? $r('app.color.app_theme_primary') : $r('app.color.app_text_cccccc'))
+        .fontColor(this.currentIndex === targetIndex ? $r('app.color.app_theme_primary') : $r('app.color.app_tab_text'))
     }
     .width('100%')
     .height(50)

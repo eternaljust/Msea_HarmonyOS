@@ -3,6 +3,34 @@
     {
       "name": "start_window_background",
       "value": "#FFFFFF"
+    },
+    {
+      "name": "app_theme_primary",
+      "value": "#53D769"
+    },
+    {
+      "name": "app_theme_secondary",
+      "value": "#3F51B5"
+    },
+    {
+      "name": "app_theme_background",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "app_tab_text",
+      "value": "#cccccc"
+    },
+    {
+      "name": "app_text_333333",
+      "value": "#333333"
+    },
+    {
+      "name": "app_text_666666",
+      "value": "#666666"
+    },
+    {
+      "name": "app_text_999999",
+      "value": "#999999"
     }
   ]
 }

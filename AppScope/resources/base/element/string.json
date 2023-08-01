@@ -3,18 +3,6 @@
     {
       "name": "app_name",
       "value": "Msea"
-    },
-    {
-      "name": "tab_home",
-      "value": "虫部落"
-    },
-    {
-      "name": "tab_notice",
-      "value": "通知"
-    },
-    {
-      "name": "tab_profile",
-      "value": "我的"
     }
   ]
 }
