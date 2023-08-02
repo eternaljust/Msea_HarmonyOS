@@ -2,75 +2,75 @@
   "float": [
     {
       "name": "text_size_headline1_96_light",
-      "value": "96"
+      "value": "96fp"
     },
     {
       "name": "text_size_headline2_72_light",
-      "value": "72"
+      "value": "72fp"
     },
     {
       "name": "text_size_headline3_60_light",
-      "value": "60"
+      "value": "60fp"
     },
     {
       "name": "text_size_headline4_48_regular",
-      "value": "48"
+      "value": "48fp"
     },
     {
       "name": "text_size_headline5_38_regular",
-      "value": "38"
+      "value": "38fp"
     },
     {
       "name": "text_size_headline6_30_medium",
-      "value": "30"
+      "value": "30fp"
     },
     {
       "name": "text_size_headline7_24_medium",
-      "value": "24"
+      "value": "24fp"
     },
     {
       "name": "text_size_headline8_20_medium",
-      "value": "20"
+      "value": "20fp"
     },
     {
       "name": "text_size_subtitle1_18_medium",
-      "value": "18"
+      "value": "18fp"
     },
     {
       "name": "text_size_subtitle2_16_medium",
-      "value": "16"
+      "value": "16fp"
     },
     {
       "name": "text_size_subtitle3_14_medium",
-      "value": "14"
+      "value": "14fp"
     },
     {
       "name": "text_size_body1_16_regular",
-      "value": "16"
+      "value": "16fp"
     },
     {
       "name": "text_size_body2_14_regular",
-      "value": "14"
+      "value": "14fp"
     },
     {
       "name": "text_size_body3_12_regular",
-      "value": "12"
+      "value": "12fp"
     },
     {
       "name": "text_size_button1_16_medium",
-      "value": "16"
+      "value": "16fp"
     },
     {
       "name": "text_size_button2_14_medium",
-      "value": "14"
+      "value": "14fp"
     },
     {
       "name": "text_size_caption_10_regular",
-      "value": "10"
+      "value": "10fp"
     },
     {
-      "name": "text_size_overline_14_regular",
-      "value": "14"
+      "name": "text_size_overine_14_regular",
+      "value": "14fp"
     }
   ]
 }
