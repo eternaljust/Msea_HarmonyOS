@@ -1,5 +1,8 @@
 {
   "src": [
-    "pages/Index"
+    "pages/Index",
+    "pages/home/HomePage",
+    "pages/notice/NoticePage",
+    "pages/profile/ProfilePage"
   ]
 }

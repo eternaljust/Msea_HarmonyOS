@@ -1,32 +1,44 @@
-let context = getContext(this);
+import { HomePage } from './home/HomePage';
+import { NoticePage } from './notice/NoticePage';
+import { ProfilePage } from './profile/ProfilePage';
 
 @Entry
 @Component
 struct Index {
-  private tabsController : TabsController = new TabsController()
+  private tabsController : TabsController = new TabsController();
   @State currentIndex: number = 0;
 
   build() {
     Tabs({ barPosition: BarPosition.End, controller: this.tabsController }) {
       TabContent() {
-        Text($r('app.string.tab_home'))
-          .fontSize($r('app.float.text_size_headline6_30_medium'))
-          .fontWeight(FontWeight.Medium)
+        HomePage()
       }
-      .tabBar(this.TabBuilder(context.resourceManager.getStringSync($r('app.string.tab_home')), 0, $r("app.media.ic_tab_home_selected"), $r("app.media.ic_tab_home_normal")))
+      .tabBar(this.TabBuilder(
+        getContext(this).resourceManager.getStringSync($r('app.string.tab_home')),
+        0,
+        $r("app.media.ic_tab_home_selected"),
+        $r("app.media.ic_tab_home_normal")
+      ))
 
       TabContent() {
-        Text($r('app.string.tab_notice'))
-          .fontSize($r('app.float.text_size_headline6_30_medium'))
-          .fontWeight(FontWeight.Medium)
+        NoticePage()
       }
-      .tabBar(this.TabBuilder(context.resourceManager.getStringSync($r('app.string.tab_notice')), 1, $r("app.media.ic_tab_profile_selected"), $r("app.media.ic_tab_profile_normal")))
+      .tabBar(this.TabBuilder(
+        getContext(this).resourceManager.getStringSync($r('app.string.tab_notice')),
+        1,
+        $r("app.media.ic_tab_profile_selected"),
+        $r("app.media.ic_tab_profile_normal")
+      ))
 
       TabContent() {
-        Text($r('app.string.tab_profile'))
-          .fontSize($r('app.float.text_size_headline6_30_medium'))
+        ProfilePage()
       }
-      .tabBar(this.TabBuilder(context.resourceManager.getStringSync($r('app.string.tab_profile')), 2, $r("app.media.ic_tab_notice_selected"), $r("app.media.ic_tab_notice_normal")))
+      .tabBar(this.TabBuilder(
+        getContext(this).resourceManager.getStringSync($r('app.string.tab_profile')),
+        2,
+        $r("app.media.ic_tab_notice_selected"),
+        $r("app.media.ic_tab_notice_normal")
+      ))
     }
     .height('100%')
     .onChange((index) => {
@@ -34,7 +46,12 @@ struct Index {
     })
   }
 
-  @Builder TabBuilder(title: string, targetIndex: number, selectedImg: Resource, normalImg: Resource) {
+  @Builder TabBuilder(
+    title: string,
+    targetIndex: number,
+    selectedImg: Resource,
+    normalImg: Resource
+  ) {
     Column() {
       Image(this.currentIndex === targetIndex ? selectedImg : normalImg)
         .size({ width: 24, height: 24 })
