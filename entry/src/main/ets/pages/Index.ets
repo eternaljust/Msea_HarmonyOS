@@ -13,7 +13,6 @@ struct Index {
   async aboutToAppear() {
     // Get the lightweight storage db file from memory.
     await PreferencesUtil.getPreferencesFromStorage();
-    UserInfo.setAuth('123')
   }
 
   build() {

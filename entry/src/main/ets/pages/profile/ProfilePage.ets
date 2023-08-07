@@ -8,7 +8,15 @@ export struct ProfilePage {
   @State isLogin: boolean = true;
   @State auth: string = '';
 
-  async aboutToAppear() {
+  aboutToAppear() {
+    this.refresh();
+  }
+
+  onPageShow() {
+    this.refresh();
+  }
+
+  async refresh() {
     let auth = <string> await UserInfo.getAuth();
     this.auth = auth;
     this.isLogin = auth != '';
@@ -21,11 +29,11 @@ export struct ProfilePage {
           Text('已登录' + this.auth)
         } else {
           Button('登录')
+            .onClick(() => {
+              UserInfo.setAuth('12345678')
+              this.refresh()
+            })
         }
-        Button(`toggle ${this.isLogin}`)
-          .onClick(() => {
-            this.isLogin = !this.isLogin;
-          })
       }
       .height('100%')
       .title(getContext(this).resourceManager.getStringSync($r('app.string.tab_profile')))

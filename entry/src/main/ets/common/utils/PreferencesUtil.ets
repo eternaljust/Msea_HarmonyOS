@@ -4,7 +4,7 @@ import * as CommonConstants from  '../constants/CommonConstants'
 import Logger from './Logger';
 
 let context = getContext(this);
-let preference: dataPreferences.Preferences = null;
+let preferences: dataPreferences.Preferences = null;
 
 class PreferencesUtil {
   /**
@@ -12,9 +12,9 @@ class PreferencesUtil {
    */
   async getPreferencesFromStorage() {
     try {
-      preference = await dataPreferences.getPreferences(context, CommonConstants.PREFERENCES_NAME);
+      preferences = await dataPreferences.getPreferences(context, CommonConstants.PREFERENCES_NAME);
     } catch (err) {
-      Logger.error(`Failed to get preferences, Cause: ${err}`);
+      Logger.error(`Failed to get preferences, Cause: ${err.message}`);
     }
   }
 
@@ -25,9 +25,9 @@ class PreferencesUtil {
     try {
       await dataPreferences.deletePreferences(context, CommonConstants.PREFERENCES_NAME);
     } catch(err) {
-      Logger.error(`Failed to delete preferences, Cause: ${err}`);
+      Logger.error(`Failed to delete preferences, Cause: ${err.message}`);
     };
-    preference = null;
+    preferences = null;
     this.showToastMessage('删除数据成功！');
   }
 
@@ -38,16 +38,30 @@ class PreferencesUtil {
    * @param {ValueType} value - Indicates the value of the preferences.
    */
   async put(key: string, value: dataPreferences.ValueType) {
-    if (preference === null) {
+    if (preferences === null) {
       await this.getPreferencesFromStorage();
     }
     try {
-      await preference.put(key, value);
-    } catch (err) {
-      Logger.error(`Failed to put value, Cause: ${err}`);
+      let promise = preferences.put(key, value);
+      promise.then(() => {
+        Logger.info(`Succeeded in put value: ${value} of key: ${key}.`);
+        // Store the Preference instance in the preference persistence file
+        try {
+          let promise = preferences.flush();
+          promise.then(() => {
+            Logger.info(`Succeeded in flush value: ${value} of key: ${key}.`);
+          }).catch((err) => {
+            Logger.info("Failed to flush. code =" + err.code + ", message =" + err.message);
+          })
+        } catch (err) {
+          Logger.info("Failed to flush. code =" + err.code + ", message =" + err.message);
+        }
+      }).catch((err) => {
+        Logger.info(`Failed to put value of '${key}'. code =` + err.code + ', message =' + err.message);
+      })
+    } catch(err) {
+      Logger.info(`Failed to put value of '${key}'. code =` + err.code + ', message =' + err.message);
     }
-    // Store the Preference instance in the preference persistence file
-    await preference.flush();
   }
 
   /**
@@ -57,13 +71,14 @@ class PreferencesUtil {
    */
   async get(key: string) {
     let value: dataPreferences.ValueType;
-    if (preference === null) {
+    if (preferences === null) {
       await this.getPreferencesFromStorage();
     }
     try {
-      value = await preference.get(key, '');
+      value = await preferences.get(key, '');
+      Logger.info(`Succeeded in get value: ${value} of key: ${key}.`);
     } catch (err) {
-      Logger.error(`Failed to get value, Cause: ${err}`);
+      Logger.info(`Failed to get value of '${key}'. code =` + err.code + ', message =' + err.message);
     }
     return value;
   }
@@ -75,16 +90,16 @@ class PreferencesUtil {
    * @param {ValueType} value - Indicates the value of the preferences.
    */
   async delete(key: string) {
-    if (preference === null) {
+    if (preferences === null) {
       await this.getPreferencesFromStorage();
     }
     try {
-      await preference.delete(key);
+      await preferences.delete(key);
     } catch (err) {
-      Logger.error(`Failed to delete value, Cause: ${err}`);
+      Logger.info(`Failed delete put value of '${key}'. code =` + err.code + ', message =' + err.message);
     }
     // Store the Preference instance in the preference persistence file
-    await preference.flush();
+    await preferences.flush();
   }
 
   /**
