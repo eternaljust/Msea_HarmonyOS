@@ -3,6 +3,8 @@
     "pages/Index",
     "pages/home/HomePage",
     "pages/notice/NoticePage",
-    "pages/profile/ProfilePage"
+    "pages/profile/ProfilePage",
+    "pages/profile/SettingPage",
+    "pages/profile/LoginPage"
   ]
 }
