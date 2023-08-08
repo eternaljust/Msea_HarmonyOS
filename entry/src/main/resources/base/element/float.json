@@ -71,6 +71,10 @@
     {
       "name": "text_size_overine_14_regular",
       "value": "14fp"
+    },
+    {
+      "name": "margin_padding_10",
+      "value": "10vp"
     }
   ]
 }

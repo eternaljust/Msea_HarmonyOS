@@ -1,6 +1,6 @@
 import dataPreferences from '@ohos.data.preferences';
-import promptAction from '@ohos.promptAction';
 import * as CommonConstants from  '../constants/CommonConstants'
+import ComponentUtil from './ComponentUtil';
 import Logger from './Logger';
 
 let context = getContext(this);
@@ -28,7 +28,7 @@ class PreferencesUtil {
       Logger.error(`Failed to delete preferences, Cause: ${err.message}`);
     };
     preferences = null;
-    this.showToastMessage('删除数据成功！');
+    ComponentUtil.showToastMessage('删除数据成功！');
   }
 
   /**
@@ -101,18 +101,6 @@ class PreferencesUtil {
     // Store the Preference instance in the preference persistence file
     await preferences.flush();
   }
-
-  /**
-   * Popup window prompt message.
-   *
-   * @param message Prompt message.
-   */
-  showToastMessage(message: string | Resource) {
-    promptAction.showToast({
-      message: message,
-      duration: CommonConstants.MESSAGE_DURATION
-    });
-  };
 }
 
 export default new PreferencesUtil();
