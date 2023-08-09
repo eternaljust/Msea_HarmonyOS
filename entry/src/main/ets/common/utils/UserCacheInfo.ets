@@ -1,6 +1,6 @@
 import dataPreferences from '@ohos.data.preferences';
 import PreferencesUtil from './PreferencesUtil';
-import { UserInfoKey } from '../constants/CommonConstants'
+import { UserInfoKey } from '../../model/LoginModel'
 
 class UserInfo {
   setAuth(value: dataPreferences.ValueType) {

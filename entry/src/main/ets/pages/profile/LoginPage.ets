@@ -1,5 +1,6 @@
-import { LoginFieldItem, LoginQuestionItem, PERCENT_100 } from '../../common/constants/CommonConstants'
-import ComponentUtil from '../../common/utils/ComponentUtil';
+import { PERCENT_100 } from '../../common/constants/CommonConstants'
+import { showToast } from '../../common/utils/ComponentUtil';
+import { LoginFieldItem, LoginQuestionItem } from '../../model/LoginModel'
 
 @Entry
 @Component
@@ -62,7 +63,7 @@ struct LoginPage {
             .margin({ top: $r('app.float.margin_padding_10')})
             .width(PERCENT_100)
             .onClick(() => {
-              ComponentUtil.showToastMessage('登录');
+              showToast('登录');
             })
         }
         .width(300)

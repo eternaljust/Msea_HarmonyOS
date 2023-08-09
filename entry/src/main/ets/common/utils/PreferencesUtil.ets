@@ -1,6 +1,6 @@
 import dataPreferences from '@ohos.data.preferences';
 import * as CommonConstants from  '../constants/CommonConstants'
-import ComponentUtil from './ComponentUtil';
+import { showToast } from './ComponentUtil';
 import Logger from './Logger';
 
 let context = getContext(this);
@@ -28,7 +28,7 @@ class PreferencesUtil {
       Logger.error(`Failed to delete preferences, Cause: ${err.message}`);
     };
     preferences = null;
-    ComponentUtil.showToastMessage('删除数据成功！');
+    showToast('删除数据成功！');
   }
 
   /**

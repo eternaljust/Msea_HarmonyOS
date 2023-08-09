@@ -2,7 +2,7 @@ import PreferencesUtil from '../common/utils/PreferencesUtil';
 import { HomePage } from './home/HomePage';
 import { NoticePage } from './notice/NoticePage';
 import { ProfilePage } from './profile/ProfilePage';
-import UserInfo from '../common/utils/UserCacheInfo'
+import { getResourceText } from '../common/utils/ResourceUtil'
 
 @Entry
 @Component
@@ -21,7 +21,7 @@ struct Index {
         HomePage()
       }
       .tabBar(this.TabBuilder(
-        getContext(this).resourceManager.getStringSync($r('app.string.tab_home')),
+        getResourceText($r('app.string.tab_home')),
         0,
         $r("app.media.ic_tab_home_selected"),
         $r("app.media.ic_tab_home_normal")
@@ -31,7 +31,7 @@ struct Index {
         NoticePage()
       }
       .tabBar(this.TabBuilder(
-        getContext(this).resourceManager.getStringSync($r('app.string.tab_notice')),
+        getResourceText($r('app.string.tab_notice')),
         1,
         $r("app.media.ic_tab_profile_selected"),
         $r("app.media.ic_tab_profile_normal")
@@ -41,7 +41,7 @@ struct Index {
         ProfilePage()
       }
       .tabBar(this.TabBuilder(
-        getContext(this).resourceManager.getStringSync($r('app.string.tab_profile')),
+        getResourceText($r('app.string.tab_profile')),
         2,
         $r("app.media.ic_tab_notice_selected"),
         $r("app.media.ic_tab_notice_normal")
