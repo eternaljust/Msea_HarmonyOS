@@ -1,6 +1,7 @@
 import { PERCENT_100 } from '../../common/constants/CommonConstants'
 import { showToast } from '../../common/utils/ComponentUtil';
 import { LoginFieldItem, LoginQuestionItem } from '../../model/LoginModel'
+import LoginViewModel from '../../viewmodel/LoginViewModel';
 
 @Entry
 @Component
@@ -78,6 +79,10 @@ struct LoginPage {
     .title('登录')
     .titleMode(NavigationTitleMode.Mini)
     .backgroundColor($r('app.color.app_theme_background'))
+  }
+
+  aboutToAppear() {
+    LoginViewModel.postData()
   }
 
   getLoginItems(): {
