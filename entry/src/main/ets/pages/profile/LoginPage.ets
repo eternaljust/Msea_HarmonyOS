@@ -1,7 +1,7 @@
 import { PERCENT_100 } from '../../common/constants/CommonConstants'
 import { showToast } from '../../common/utils/ComponentUtil';
 import { LoginFieldItem, LoginQuestionItem } from '../../model/LoginModel'
-import LoginViewModel from '../../viewmodel/LoginViewModel';
+import { loginViewModel } from '../../viewmodel/LoginViewModel';
 
 @Entry
 @Component
@@ -28,8 +28,8 @@ struct LoginPage {
 
         Column() {
           Row() {
-            Text(`${LoginFieldItem.title(this.loginItem)} ▼`)
-              .bindMenu(this.getLoginItems())
+            // Text(`${LoginFieldItem.title(this.loginItem)} ▼`)
+            //   .bindMenu(this.getLoginItems())
           }
           .width(PERCENT_100)
           .justifyContent(FlexAlign.Start)
@@ -42,7 +42,7 @@ struct LoginPage {
             .type(InputType.Password)
 
           Row() {
-            Text('安全提问：')
+            // Text('安全提问：')
 
             Button(`${LoginQuestionItem.title(this.questionItem)}`)
               .fontColor($r('app.color.app_theme_secondary'))
@@ -82,7 +82,7 @@ struct LoginPage {
   }
 
   aboutToAppear() {
-    LoginViewModel.postData()
+    loginViewModel.postData()
   }
 
   getLoginItems(): {

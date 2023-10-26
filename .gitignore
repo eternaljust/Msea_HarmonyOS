@@ -1,5 +1,5 @@
-/node_modules
-/oh_modules
+/oh_modules/@ohos
+/oh_modules/.ohpm
 /local.properties
 /.idea
 **/build
