@@ -4,4 +4,11 @@
 
 ### 页面截图
 
-![](https://raw.githubusercontent.com/eternaljust/Msea_HarmonyOS/main/assets/snapshot1.png)
+![登录](https://z1.ax1x.com/2023/11/17/pit4z5D.png)
+
+### 开发环境
+
+> DevEco Studio 3.1.1 Release
+> 
+> Build Version: 3.1.0.501, built on June 20, 2023
+>
