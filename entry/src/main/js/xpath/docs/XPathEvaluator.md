@@ -4,11 +4,11 @@ The `xpath.parse()` method returns an `XPathEvaluator`, which contains the follo
 
 Each of these methods takes an optional `options` object, which can contain any of the following properties. See the links for each item for further details:
 
-- `namespaces` - a [namespace resolver](namespace%20resolvers.md)
+- `namespaces` - a [namespace resolver](namespace resolvers.md)
 
-- `variables` - a [variable resolver](variable%20resolvers.md)
+- `variables` - a [variable resolver](variable resolvers.md)
 
-- `functions` - a [function resolver](function%20resolvers.md)
+- `functions` - a [function resolver](function resolvers.md)
 
 - `node` - the context node for evaluating the expression
 
@@ -28,7 +28,7 @@ var character = evaluator.select1({
 
 `evaluate([options])`
 
-Evaluates the XPath expression and returns the result. The resulting type is determined based on the type of the expression, using the same criteria as [`xpath.select`](xpath%20methods.md).
+Evaluates the XPath expression and returns the result. The resulting type is determined based on the type of the expression, using the same criteria as [`xpath.select`](xpath methods.md).
 
 `evaluateNumber([options])`
 

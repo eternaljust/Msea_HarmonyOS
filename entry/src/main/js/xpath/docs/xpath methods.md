@@ -4,7 +4,7 @@ This page details the methods exposed on the `xpath` object.
 
 ### `xpath.parse(expression)`
 
-Creates a parsed expression. See the [documentation page](parsed%20expressions.md) for details.
+Creates a parsed expression. See the [documentation page](parsed expressions.md) for details.
 
 ### `xpath.select(expression[, node[, single]])`
 

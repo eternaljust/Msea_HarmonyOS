@@ -8,7 +8,7 @@
 
 ### 开发环境
 
-> DevEco Studio 3.1.1 Release
+> [DevEco Studio 4.0 Release](https://docs.openharmony.cn/pages/v4.0/zh-cn/release-notes/OpenHarmony-v4.0-release.md/#%E9%85%8D%E5%A5%97%E5%85%B3%E7%B3%BB "DevEco Studio 下载地址")
 > 
-> Build Version: 3.1.0.501, built on June 20, 2023
+> Build Version: 4.0.0.600, built on October 17, 2023
 >
