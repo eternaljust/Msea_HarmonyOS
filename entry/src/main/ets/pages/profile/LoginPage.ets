@@ -78,7 +78,6 @@ struct LoginPage {
     .height(PERCENT_100)
     .title('登录')
     .titleMode(NavigationTitleMode.Mini)
-    .backgroundColor($r('app.color.app_theme_background'))
   }
 
   aboutToAppear() {
