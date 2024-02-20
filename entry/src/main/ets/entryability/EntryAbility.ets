@@ -1,10 +1,12 @@
 import UIAbility from '@ohos.app.ability.UIAbility';
 import window from '@ohos.window';
 import Logger from  '../common/utils/Logger'
+import PreferencesUtil from '../common/utils/PreferencesUtil';
 
 export default class EntryAbility extends UIAbility {
-    onCreate(want, launchParam) {
+    async onCreate(want, launchParam) {
         Logger.info('Ability onCreate');
+        await PreferencesUtil.getPreferencesFromStorage(this.context);
     }
 
     onDestroy() {

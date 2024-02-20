@@ -1,5 +1,6 @@
 import router from '@ohos.router';
 import { PERCENT_100 } from '../../common/constants/CommonConstants';
+import Logger from '../../common/utils/Logger';
 import UserInfo from '../../common/utils/UserCacheInfo'
 
 @Entry
@@ -9,16 +10,18 @@ export struct ProfilePage {
   @State isLogin: boolean = true;
   @State auth: string = '';
 
-  aboutToAppear() {
+  onPageShow() {
+    Logger.info('NoticePage onPageShow')
     this.refresh();
   }
 
-  onPageShow() {
+  aboutToAppear() {
+    Logger.info('ProfilePage aboutToAppear')
     this.refresh();
   }
 
   async refresh() {
-    let auth = <string> await UserInfo.getAuth();
+    let auth = await UserInfo.getAuth() as string;
     this.auth = auth;
     this.isLogin = auth != '';
   }

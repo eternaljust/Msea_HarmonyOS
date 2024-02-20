@@ -1,4 +1,3 @@
-import PreferencesUtil from '../common/utils/PreferencesUtil';
 import { HomePage } from './home/HomePage';
 import { NoticePage } from './notice/NoticePage';
 import { ProfilePage } from './profile/ProfilePage';
@@ -9,11 +8,6 @@ import { getResourceText } from '../common/utils/ResourceUtil'
 struct Index {
   private tabsController : TabsController = new TabsController();
   @State currentIndex: number = 0;
-
-  async aboutToAppear() {
-    // Get the lightweight storage db file from memory.
-    await PreferencesUtil.getPreferencesFromStorage();
-  }
 
   build() {
     Tabs({ barPosition: BarPosition.End, controller: this.tabsController }) {

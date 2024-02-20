@@ -1,20 +1,6 @@
 {
   "app": {
-    "signingConfigs": [
-      {
-        "name": "default",
-        "type": "HarmonyOS",
-        "material": {
-          "certpath": "/Users/tzqiang/.ohos/config/auto_debug_Msea_HarmonyOS_com.eternaljust.msea.huawei_30086000632738366.cer",
-          "storePassword": "0000001B1B4C972D23E910CFF820209C997DDCECC2B46AA60FE06FC0C7FC50394272B3620E16C89C6BC367",
-          "keyAlias": "debugKey",
-          "keyPassword": "0000001BD5DC94069FA59B578B8B531E66317163C92D2AAED1889525440355D2C3D8106195E430C0B0DF46",
-          "profile": "/Users/tzqiang/.ohos/config/auto_debug_Msea_HarmonyOS_com.eternaljust.msea.huawei_30086000632738366.p7b",
-          "signAlg": "SHA256withECDSA",
-          "storeFile": "/Users/tzqiang/.ohos/config/auto_debug_Msea_HarmonyOS_com.eternaljust.msea.huawei_30086000632738366.p12"
-        }
-      }
-    ],
+    "signingConfigs": [],
     "compileSdkVersion": 9,
     "compatibleSdkVersion": 9,
     "products": [
