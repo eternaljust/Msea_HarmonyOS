@@ -5,8 +5,5 @@
   "description": "example description",
   "repository": {},
   "version": "1.0.0",
-  "dependencies": {
-    "xpath": "file:entry/src/main/js/xpath",
-    "@xmldom/xmldom": "file:entry/src/main/js/@xmldom/xmldom"
-  }
+  "dependencies": {}
 }

@@ -3,6 +3,7 @@ import { PERCENT_100 } from '../../common/constants/CommonConstants'
 import { showToast } from '../../common/utils/ComponentUtil';
 import { LoginFieldItem, LoginQuestionItem } from '../../model/LoginModel'
 import { loginViewModel } from '../../viewmodel/LoginViewModel';
+import router from '@ohos.router';
 
 @Entry
 @Component
@@ -21,6 +22,9 @@ struct LoginPage {
     LoginQuestionItem.LAST_FOUR_DIGITS_OF_DRIVER_LICENSE
   ];
   @State questionItem: LoginQuestionItem = LoginQuestionItem.NO;
+  @State username: string = '';
+  @State password: string = '';
+  @State answer: string = '';
 
   build() {
     Navigation() {
@@ -37,10 +41,16 @@ struct LoginPage {
 
           TextInput({placeholder: `请输入${LoginFieldItem.title(this.loginItem)}`})
             .margin({ top: $r('app.float.margin_padding_10') })
+            .onChange((value) => {
+              this.username = value
+            })
 
           TextInput({placeholder: '请输入密码'})
             .margin({ top: $r('app.float.margin_padding_10') })
             .type(InputType.Password)
+            .onChange((value) => {
+              this.password = value
+            })
 
           Row() {
             Text('安全提问：')
@@ -59,13 +69,17 @@ struct LoginPage {
           if (this.questionItem != LoginQuestionItem.NO) {
             TextInput({placeholder: '请输入答案'})
               .margin({ top: $r('app.float.margin_padding_10') })
+              .onChange((value) => {
+                this.answer = value
+              })
           }
 
           Button('登录')
             .margin({ top: $r('app.float.margin_padding_10')})
             .width(PERCENT_100)
+            .enabled(this.username.length != 0 && this.password.length != 0)
             .onClick(() => {
-              showToast('登录');
+              this.login()
             })
         }
         .width(300)
@@ -79,10 +93,6 @@ struct LoginPage {
     .height(PERCENT_100)
     .title('登录')
     .titleMode(NavigationTitleMode.Mini)
-  }
-
-  aboutToAppear() {
-    loginViewModel.postData()
   }
 
   getLoginItems(): {
@@ -129,5 +139,19 @@ struct LoginPage {
     }
 
     return items;
+  }
+
+  async login() {
+    let result: [boolean, string] = await loginViewModel.login(
+      this.loginItem,
+      this.questionItem,
+      this.username,
+      this.password, this.answer
+    );
+
+    if (result[0]) {
+      router.back()
+    }
+    showToast(result[1])
   }
 }
