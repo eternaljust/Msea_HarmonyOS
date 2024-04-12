@@ -9,18 +9,7 @@ import router from '@ohos.router';
 @Component
 @Preview
 struct LoginPage {
-  private fieldItems: LoginFieldItem[] = [LoginFieldItem.USERNAME, LoginFieldItem.EMAIL];
   @State loginItem: LoginFieldItem = LoginFieldItem.USERNAME;
-  private questionItems: LoginQuestionItem[] = [
-    LoginQuestionItem.NO,
-    LoginQuestionItem.MOTHER_NAME,
-    LoginQuestionItem.GRANDPA_NAME,
-    LoginQuestionItem.FATHER_BORN_CITY,
-    LoginQuestionItem.ONE_TEACHER_NAME,
-    LoginQuestionItem.COMPUTER_MODEL,
-    LoginQuestionItem.FAVORITE_RESTAURANT_NAME,
-    LoginQuestionItem.LAST_FOUR_DIGITS_OF_DRIVER_LICENSE
-  ];
   @State questionItem: LoginQuestionItem = LoginQuestionItem.NO;
   @State username: string = '';
   @State password: string = '';
@@ -56,9 +45,9 @@ struct LoginPage {
             Text('安全提问：')
 
             Button(`${LoginQuestionItem.title(this.questionItem)}`)
-              .fontColor($r('app.color.app_theme_secondary'))
+              .fontColor($r('app.color.app_theme_primary'))
               .backgroundColor(Color.Transparent)
-              .borderColor($r('app.color.app_theme_secondary'))
+              .borderColor($r('app.color.app_theme_primary'))
               .borderWidth(1)
               .height(30)
               .bindMenu(this.getQuestionItems())
@@ -75,6 +64,7 @@ struct LoginPage {
           }
 
           Button('登录')
+            .backgroundColor($r('app.color.app_theme_primary'))
             .margin({ top: $r('app.float.margin_padding_10')})
             .width(PERCENT_100)
             .enabled(this.username.length != 0 && this.password.length != 0)
@@ -104,12 +94,12 @@ struct LoginPage {
       action: () => void
     }[] = [];
 
-    for (let i = 0; i < this.fieldItems.length; i++) {
+    for (let i = 0; i < loginViewModel.fieldItems.length; i++) {
       items.push(
         {
-          value: LoginFieldItem.title(this.fieldItems[i]),
+          value: LoginFieldItem.title(loginViewModel.fieldItems[i]),
           action: () => {
-            this.loginItem = this.fieldItems[i];
+            this.loginItem = loginViewModel.fieldItems[i];
           }
         }
       );
@@ -127,12 +117,12 @@ struct LoginPage {
       action: () => void
     }[] = [];
 
-    for (let i = 0; i < this.questionItems.length; i++) {
+    for (let i = 0; i < loginViewModel.questionItems.length; i++) {
       items.push(
         {
-          value: LoginQuestionItem.title(this.questionItems[i]),
+          value: LoginQuestionItem.title(loginViewModel.questionItems[i]),
           action: () => {
-            this.questionItem = this.questionItems[i];
+            this.questionItem = loginViewModel.questionItems[i];
           }
         }
       );
@@ -146,7 +136,8 @@ struct LoginPage {
       this.loginItem,
       this.questionItem,
       this.username,
-      this.password, this.answer
+      this.password,
+      this.answer
     );
 
     if (result[0]) {

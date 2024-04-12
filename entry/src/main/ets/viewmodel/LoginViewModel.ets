@@ -3,8 +3,21 @@ import { httpRequestGet, httpRequestPost } from '../common/utils/NetworkUtil'
 import * as xpath from 'xpath';
 import { DOMParser } from '@xmldom/xmldom'
 import { getLoginData } from '../common/utils/AxiosApi';
+import { LoginFieldItem, LoginQuestionItem } from '../model/LoginModel';
 
 class LoginViewModel {
+  fieldItems: LoginFieldItem[] = [LoginFieldItem.USERNAME, LoginFieldItem.EMAIL];
+  questionItems: LoginQuestionItem[] = [
+    LoginQuestionItem.NO,
+    LoginQuestionItem.MOTHER_NAME,
+    LoginQuestionItem.GRANDPA_NAME,
+    LoginQuestionItem.FATHER_BORN_CITY,
+    LoginQuestionItem.ONE_TEACHER_NAME,
+    LoginQuestionItem.COMPUTER_MODEL,
+    LoginQuestionItem.FAVORITE_RESTAURANT_NAME,
+    LoginQuestionItem.LAST_FOUR_DIGITS_OF_DRIVER_LICENSE
+  ];
+
   async login(
     loginfield: string,
     questionid: string,
