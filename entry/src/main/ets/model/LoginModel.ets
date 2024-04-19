@@ -50,6 +50,19 @@ export namespace LoginQuestionItem {
         return '未设置请忽略';
     }
   }
+
+  export function allCases(): LoginQuestionItem[] {
+    return [
+      LoginQuestionItem.NO,
+      LoginQuestionItem.MOTHER_NAME,
+      LoginQuestionItem.GRANDPA_NAME,
+      LoginQuestionItem.FATHER_BORN_CITY,
+      LoginQuestionItem.ONE_TEACHER_NAME,
+      LoginQuestionItem.COMPUTER_MODEL,
+      LoginQuestionItem.FAVORITE_RESTAURANT_NAME,
+      LoginQuestionItem.LAST_FOUR_DIGITS_OF_DRIVER_LICENSE
+    ];
+  }
 }
 
 export class UserInfoKey {

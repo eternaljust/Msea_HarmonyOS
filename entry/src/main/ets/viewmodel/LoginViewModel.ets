@@ -1,5 +1,4 @@
 import Logger from '../common/utils/Logger';
-import { httpRequestGet, httpRequestPost } from '../common/utils/NetworkUtil'
 import * as xpath from 'xpath';
 import { DOMParser } from '@xmldom/xmldom'
 import { getLoginData } from '../common/utils/AxiosApi';
@@ -7,16 +6,7 @@ import { LoginFieldItem, LoginQuestionItem } from '../model/LoginModel';
 
 class LoginViewModel {
   fieldItems: LoginFieldItem[] = [LoginFieldItem.USERNAME, LoginFieldItem.EMAIL];
-  questionItems: LoginQuestionItem[] = [
-    LoginQuestionItem.NO,
-    LoginQuestionItem.MOTHER_NAME,
-    LoginQuestionItem.GRANDPA_NAME,
-    LoginQuestionItem.FATHER_BORN_CITY,
-    LoginQuestionItem.ONE_TEACHER_NAME,
-    LoginQuestionItem.COMPUTER_MODEL,
-    LoginQuestionItem.FAVORITE_RESTAURANT_NAME,
-    LoginQuestionItem.LAST_FOUR_DIGITS_OF_DRIVER_LICENSE
-  ];
+  questionItems: LoginQuestionItem[] = LoginQuestionItem.allCases();
 
   async login(
     loginfield: string,
@@ -30,17 +20,17 @@ class LoginViewModel {
       let html = data.data as string;
       Logger.info(data.data);
       let dom = new DOMParser();
-      let xml = html.replace(DOCTYPE, '').replace(/\r\n/g, '')
-      xml = xml.replace(xmlns, '')
+      let xml = html.replace(DOCTYPE, '').replace(/\r\n/g, '');
+      xml = xml.replace(xmlns, '');
       let doc = dom.parseFromString(xml, 'text/xml');
 
       if (html.includes('欢迎您回来')) {
         let myinfo = xpath.select('//div[@id="myinfo"]/p/strong/a', doc) as Array<Node>;
-        let lv = myinfo[0].firstChild.nodeValue
-        let name = myinfo[1].firstChild.nodeValue
+        let lv = myinfo[0].firstChild.nodeValue;
+        let name = myinfo[1].firstChild.nodeValue;
         let message = `欢迎您回来，${lv} ${name}`;
-        Logger.debug('mesa myinfo', message)
-        return [true, message]
+        Logger.debug('mesa myinfo', message);
+        return [true, message];
       } else {
         let alertError = xpath.select('//div[@class="alert_error"]/p', doc, true);
         if (xpath.isNodeLike(alertError)) {

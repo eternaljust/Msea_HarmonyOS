@@ -4,6 +4,7 @@ import { showToast } from '../../common/utils/ComponentUtil';
 import { LoginFieldItem, LoginQuestionItem } from '../../model/LoginModel'
 import { loginViewModel } from '../../viewmodel/LoginViewModel';
 import router from '@ohos.router';
+import BindMenuNormalItem from '../../view/Widget'
 
 @Entry
 @Component
@@ -30,16 +31,12 @@ struct LoginPage {
 
           TextInput({placeholder: `请输入${LoginFieldItem.title(this.loginItem)}`})
             .margin({ top: $r('app.float.margin_padding_10') })
-            .onChange((value) => {
-              this.username = value
-            })
+            .onChange(value => (this.username = value))
 
           TextInput({placeholder: '请输入密码'})
             .margin({ top: $r('app.float.margin_padding_10') })
             .type(InputType.Password)
-            .onChange((value) => {
-              this.password = value
-            })
+            .onChange((value) => this.password = value)
 
           Row() {
             Text('安全提问：')
@@ -58,9 +55,7 @@ struct LoginPage {
           if (this.questionItem != LoginQuestionItem.NO) {
             TextInput({placeholder: '请输入答案'})
               .margin({ top: $r('app.float.margin_padding_10') })
-              .onChange((value) => {
-                this.answer = value
-              })
+              .onChange(value => this.answer = value)
           }
 
           Button('登录')
@@ -68,9 +63,7 @@ struct LoginPage {
             .margin({ top: $r('app.float.margin_padding_10')})
             .width(PERCENT_100)
             .enabled(this.username.length != 0 && this.password.length != 0)
-            .onClick(() => {
-              this.login()
-            })
+            .onClick(() => this.login())
         }
         .width(300)
         .justifyContent(FlexAlign.Center)
@@ -85,50 +78,18 @@ struct LoginPage {
     .titleMode(NavigationTitleMode.Mini)
   }
 
-  getLoginItems(): {
-    value: string;
-    action: () => void
-  }[] {
-    let items: {
-      value: string;
-      action: () => void
-    }[] = [];
-
-    for (let i = 0; i < loginViewModel.fieldItems.length; i++) {
-      items.push(
-        {
-          value: LoginFieldItem.title(loginViewModel.fieldItems[i]),
-          action: () => {
-            this.loginItem = loginViewModel.fieldItems[i];
-          }
-        }
-      );
-    }
-
-    return items;
+  getLoginItems(): BindMenuNormalItem[] {
+    return loginViewModel.fieldItems.map(value => ({
+      value: LoginFieldItem.title(value),
+      action: () => this.loginItem = value,
+    }));
   }
 
-  getQuestionItems(): {
-    value: string;
-    action: () => void
-  }[] {
-    let items: {
-      value: string;
-      action: () => void
-    }[] = [];
-
-    for (let i = 0; i < loginViewModel.questionItems.length; i++) {
-      items.push(
-        {
-          value: LoginQuestionItem.title(loginViewModel.questionItems[i]),
-          action: () => {
-            this.questionItem = loginViewModel.questionItems[i];
-          }
-        }
-      );
-    }
-
-    return items;
+  getQuestionItems(): BindMenuNormalItem[] {
+    return loginViewModel.questionItems.map(value => ({
+      value: LoginQuestionItem.title(value),
+      action: () => this.questionItem = value,
+    }));
   }
 
   async login() {
