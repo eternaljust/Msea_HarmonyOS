@@ -6,8 +6,8 @@
   "repository": {},
   "version": "1.0.0",
   "dependencies": {
+    "@ohos/axios": "^2.2.0",
     "xpath": "file:src/main/js/xpath",
     "@xmldom/xmldom": "file:src/main/js/@xmldom/xmldom",
-    "@ohos/axios": "^2.2.0"
   }
 }

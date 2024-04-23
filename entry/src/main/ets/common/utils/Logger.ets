@@ -1,41 +1,30 @@
-import hilog from '@ohos.hilog';
-
-const LOGGER_PREFIX: string = 'Msea';
+import { hilog } from '@kit.PerformanceAnalysisKit';
 
 class Logger {
   private domain: number;
   private prefix: string;
+  private format: string = "%{public}s, %{public}s";
 
-  // format Indicates the log format string.
-  private format: string = '%{public}s, %{public}s';
-
-  /**
-   * constructor.
-   *
-   * @param prefix Identifies the log tag.
-   * @param domain Indicates the service domain, which is a hexadecimal integer ranging from 0x0 to 0xFFFFF
-   * @param args Indicates the log parameters.
-   */
-  constructor(prefix: string = '', domain: number = 0xFF00) {
+  constructor(prefix: string) {
     this.prefix = prefix;
-    this.domain = domain;
+    this.domain = 0xFF00;
   }
 
-  debug(...args: any[]): void {
+  debug(...args: Object[]): void {
     hilog.debug(this.domain, this.prefix, this.format, args);
   }
 
-  info(...args: any[]): void {
+  info(...args: Object[]): void {
     hilog.info(this.domain, this.prefix, this.format, args);
   }
 
-  warn(...args: any[]): void {
+  warn(...args: Object[]): void {
     hilog.warn(this.domain, this.prefix, this.format, args);
   }
 
-  error(...args: any[]): void {
+  error(...args: Object[]): void {
     hilog.error(this.domain, this.prefix, this.format, args);
   }
 }
 
-export default new Logger(LOGGER_PREFIX, 0xFF02);
+export default new Logger('[Msea]');

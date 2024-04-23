@@ -1,5 +1,5 @@
 import Logger from '../common/utils/Logger';
-import * as xpath from 'xpath';
+import xpath from 'xpath';
 import { DOMParser } from '@xmldom/xmldom'
 import { getLoginData } from '../common/utils/AxiosApi';
 import { LoginFieldItem, LoginQuestionItem } from '../model/LoginModel';
@@ -26,21 +26,21 @@ class LoginViewModel {
 
       if (html.includes('欢迎您回来')) {
         let myinfo = xpath.select('//div[@id="myinfo"]/p/strong/a', doc) as Array<Node>;
-        let lv = myinfo[0].firstChild.nodeValue;
-        let name = myinfo[1].firstChild.nodeValue;
+        let lv = myinfo[0].firstChild?.nodeValue ?? '';
+        let name = myinfo[1].firstChild?.nodeValue ?? '';
         let message = `欢迎您回来，${lv} ${name}`;
         Logger.debug('mesa myinfo', message);
         return [true, message];
       } else {
         let alertError = xpath.select('//div[@class="alert_error"]/p', doc, true);
         if (xpath.isNodeLike(alertError)) {
-          let value = alertError.firstChild.nodeValue;
+          let value = alertError.firstChild?.nodeValue ?? '';
           Logger.debug('mesa alert', value);
           return [false, value];
         } else {
           let info = xpath.select('//div[@class="info"]/li', doc, true);
           if (xpath.isNodeLike(info)) {
-            let value = info.firstChild.nodeValue;
+            let value = info.firstChild?.nodeValue ?? '';
             Logger.debug('mesa info', value);
             return [false, value];
           } else {

@@ -1,10 +1,9 @@
-// @ts-nocheck
 import { PERCENT_100 } from '../../common/constants/CommonConstants'
 import { showToast } from '../../common/utils/ComponentUtil';
 import { LoginFieldItem, LoginQuestionItem } from '../../model/LoginModel'
-import { loginViewModel } from '../../viewmodel/LoginViewModel';
 import router from '@ohos.router';
-import BindMenuNormalItem from '../../view/Widget'
+import { BindMenuNormalItem } from '../../view/Widget'
+// import { loginViewModel } from '../../viewmodel/LoginViewModel';
 
 @Entry
 @Component
@@ -24,7 +23,7 @@ struct LoginPage {
         Column() {
           Row() {
             Text(`${LoginFieldItem.title(this.loginItem)} ▼`)
-              .bindMenu(this.getLoginItems())
+              // .bindMenu(this.getLoginItems())
           }
           .width(PERCENT_100)
           .justifyContent(FlexAlign.Start)
@@ -47,7 +46,7 @@ struct LoginPage {
               .borderColor($r('app.color.app_theme_primary'))
               .borderWidth(1)
               .height(30)
-              .bindMenu(this.getQuestionItems())
+              // .bindMenu(this.getQuestionItems())
           }
           .width(PERCENT_100)
           .margin({ top: $r('app.float.margin_padding_10') })
@@ -63,7 +62,7 @@ struct LoginPage {
             .margin({ top: $r('app.float.margin_padding_10')})
             .width(PERCENT_100)
             .enabled(this.username.length != 0 && this.password.length != 0)
-            .onClick(() => this.login())
+            // .onClick(() => this.login())
         }
         .width(300)
         .justifyContent(FlexAlign.Center)
@@ -78,32 +77,41 @@ struct LoginPage {
     .titleMode(NavigationTitleMode.Mini)
   }
 
-  getLoginItems(): BindMenuNormalItem[] {
-    return loginViewModel.fieldItems.map(value => ({
-      value: LoginFieldItem.title(value),
-      action: () => this.loginItem = value,
-    }));
-  }
-
-  getQuestionItems(): BindMenuNormalItem[] {
-    return loginViewModel.questionItems.map(value => ({
-      value: LoginQuestionItem.title(value),
-      action: () => this.questionItem = value,
-    }));
-  }
-
-  async login() {
-    let result: [boolean, string] = await loginViewModel.login(
-      this.loginItem,
-      this.questionItem,
-      this.username,
-      this.password,
-      this.answer
-    );
-
-    if (result[0]) {
-      router.back()
-    }
-    showToast(result[1])
-  }
+  // getLoginItems(): BindMenuNormalItem[] {
+  //   let items = loginViewModel.fieldItems.map(value => {
+  //     let item: BindMenuNormalItem = {
+  //       value: LoginFieldItem.title(value),
+  //       action: () => { this.loginItem = value }
+  //     };
+  //     return item;
+  //   });
+  //   return items;
+  // }
+  //
+  // getQuestionItems(): BindMenuNormalItem[] {
+  //   let items = loginViewModel.questionItems.map(value => {
+  //     let item: BindMenuNormalItem = {
+  //       value: LoginQuestionItem.title(value),
+  //       action:
+  //       () => this.questionItem = value,
+  //     };
+  //     return item;
+  //   });
+  //   return items;
+  // }
+  //
+  // async login() {
+  //   let result: [boolean, string] = await loginViewModel.login(
+  //     this.loginItem,
+  //     this.questionItem,
+  //     this.username,
+  //     this.password,
+  //     this.answer
+  //   );
+  //
+  //   if (result[0]) {
+  //     router.back()
+  //   }
+  //   showToast(result[1])
+  // }
 }

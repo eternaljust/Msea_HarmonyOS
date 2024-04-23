@@ -1,14 +1,14 @@
 import dataPreferences from '@ohos.data.preferences';
-import PreferencesUtil from './PreferencesUtil';
+import { PreferencesUtil } from './PreferencesUtil';
 import { UserInfoKey } from '../../model/LoginModel'
 
 class UserInfo {
   setAuth(value: dataPreferences.ValueType) {
-    PreferencesUtil.put(UserInfoKey.AUTH, value)
+    PreferencesUtil.getInstance().put(UserInfoKey.AUTH, value)
   }
 
-  getAuth() {
-    return PreferencesUtil.get(UserInfoKey.AUTH)
+  getAuth(): Promise<dataPreferences.ValueType | undefined> {
+    return PreferencesUtil.getInstance().get(UserInfoKey.AUTH)
   }
 }
 

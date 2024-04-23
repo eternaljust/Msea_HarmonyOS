@@ -33,7 +33,7 @@ export function getLoginData(
   username: string,
   password: string,
   answer: string
-): Promise<AxiosResponse> {
+): Promise<AxiosResponse<string, null>> {
   return axios({
     url: "/member.php?mod=logging&action=login&loginsubmit=yes",
     method: 'get',

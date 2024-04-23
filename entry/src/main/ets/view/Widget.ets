@@ -1,4 +1,4 @@
-export interface BindMenuNormalItem {
-  value: string;
-  action: () => void
+export class BindMenuNormalItem {
+  value: string = ''
+  action: () => void = () => {};
 }

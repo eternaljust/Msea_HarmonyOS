@@ -1,82 +1,68 @@
-import dataPreferences from '@ohos.data.preferences';
-import * as CommonConstants from  '../constants/CommonConstants'
-import { showToast } from './ComponentUtil';
 import Logger from './Logger';
+import { preferences } from '@kit.ArkData';
+import { common } from '@kit.AbilityKit';
 
-let preferences: dataPreferences.Preferences = null;
+const PREFERENCES_NAME = 'MseaPreferences';
+const TAG = '[PreferencesUtil]';
 
-class PreferencesUtil {
-  /**
-   * Read the specified Preferences persistence file and load the data into the Preferences instance.
-   */
-  async getPreferencesFromStorage(context: Context) {
+export class PreferencesUtil {
+  private preferences?: preferences.Preferences;
+  private context = getContext(this) as common.UIAbilityContext;
+  private static instance: PreferencesUtil;
+
+  constructor() {
+    this.initPreference(PREFERENCES_NAME);
+  }
+
+  public static getInstance(): PreferencesUtil {
+    if (!PreferencesUtil.instance) {
+      PreferencesUtil.instance = new PreferencesUtil();
+    }
+    return PreferencesUtil.instance;
+  }
+
+  async initPreference(storeName: string) {
     try {
-      preferences = await dataPreferences.getPreferences(context, CommonConstants.PREFERENCES_NAME);
+      this.preferences = await preferences.getPreferences(this.context, storeName)
     } catch (e) {
-      Logger.error(`Failed to get preferences, error: ${e}`);
+      Logger.error(TAG, `Failed to get preferences, error: ${JSON.stringify(e)}`);
     }
   }
 
-  /**
-   * Deletes the specified Preferences persistence file from memory and removes the Preferences instance.
-   */
-  async deletePreferences(context: Context) {
+  async deletePreferences() {
     try {
-      await dataPreferences.deletePreferences(context, CommonConstants.PREFERENCES_NAME);
+      await preferences.deletePreferences(this.context, PREFERENCES_NAME);
     } catch(e) {
-      Logger.error(`Failed to delete preferences, error: ${e}`);
+      Logger.error(TAG, `Failed to delete preferences, error: ${JSON.stringify(e)}`);
     };
-    preferences = null;
-    showToast('删除数据成功！');
   }
 
-  /**
-   * Save the data to the Preferences.
-   *
-   * @param {string} key - Indicates the key of the preferences to modify. It cannot be {@code null} or empty.
-   * @param {ValueType} value - Indicates the value of the preferences.
-   */
-  async put(key: string, value: dataPreferences.ValueType) {
+  async put(key: string, value: preferences.ValueType) {
     try {
-      await preferences.put(key, value);
-      // Store the Preference instance in the preference persistence file
-      await preferences.flush();
+      await this.preferences?.put(key, value);
+      await this.preferences?.flush();
     } catch (e) {
-      Logger.info(`Failed put value of '${key}'. error: ${e}`);
+      Logger.error(TAG, `Failed put value of '${key}'. error: ${JSON.stringify(e)}`);
     }
   }
 
-  /**
-   * Get preference data.
-   *
-   * @param {string} key - Indicates the key of the preferences. It cannot be {@code null} or empty.
-   */
   async get(key: string) {
     try {
-      let value = await preferences.get(key, '');
-      Logger.info(`Succeeded get value: ${value} of key: ${key}.`);
+      let value = await this.preferences?.get(key, '');
+      Logger.info(TAG, `Succeeded get value: ${value} of key: ${key}.`);
       return value
     } catch (e) {
-      Logger.info(`Failed get value of '${key}'. error: ${e}`);
+      Logger.error(TAG, `Failed get value of '${key}'. error: ${JSON.stringify(e)}`);
       return ''
     }
   }
 
-  /**
-   * Save the data to the Preferences.
-   *
-   * @param {string} key - Indicates the key of the preferences to modify. It cannot be {@code null} or empty.
-   * @param {ValueType} value - Indicates the value of the preferences.
-   */
   async delete(key: string) {
     try {
-      await preferences.delete(key);
-      // Store the Preference instance in the preference persistence file
-      await preferences.flush();
+      await this.preferences?.delete(key);
+      await this.preferences?.flush();
     } catch (e) {
-      Logger.info(`Failed delete value of '${key}'. error: ${e}`);
+      Logger.error(TAG, `Failed delete value of '${key}'. error: ${JSON.stringify(e)}`);
     }
   }
 }
-
-export default new PreferencesUtil();

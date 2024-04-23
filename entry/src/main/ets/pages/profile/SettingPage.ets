@@ -1,8 +1,6 @@
-// @ts-nocheck
 import { PERCENT_100 } from '../../common/constants/CommonConstants'
 import UserInfo from '../../common/utils/UserCacheInfo'
 import router from '@ohos.router';
-import { PERCENT_100 } from '../../common/constants/CommonConstants';
 import Logger from '../../common/utils/Logger';
 
 @Entry

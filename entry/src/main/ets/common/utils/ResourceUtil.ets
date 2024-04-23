@@ -1,4 +1,4 @@
 
 export function getResourceText(resource: Resource) {
-  return getContext(this).resourceManager.getStringSync(resource);
+  return getContext().resourceManager.getStringSync(resource);
 }
