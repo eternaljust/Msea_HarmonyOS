@@ -3,7 +3,6 @@
   "devDependencies": {},
   "name": "entry",
   "description": "example description",
-  "repository": {},
   "version": "1.0.0",
   "dependencies": {
     "@ohos/axios": "^2.2.0",

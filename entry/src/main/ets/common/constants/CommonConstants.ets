@@ -1,6 +1,7 @@
-export const PREFERENCES_NAME = 'MseaPreferences';
-export const MESSAGE_DURATION = 3000;
-export const HTTP_TIMEOUT = 10000;
 
-// percent
-export const PERCENT_100 = '100%'
+export class CommonConstants {
+  static readonly MESSAGE_DURATION = 3000;
+  static readonly HTTP_TIMEOUT = 10000;
+  // percent
+  static readonly PERCENT_100 = '100%'
+}

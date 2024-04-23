@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from "@ohos/axios"
+import { UrlConstants } from '../constants/UrlConstants'
 
 // 全局 axios 默认值
 axios.defaults.baseURL = "http://www.chongbuluo.com/"
@@ -26,7 +27,15 @@ axios.interceptors.response.use((response:AxiosResponse)=> {
   return Promise.reject(error);
 });
 
-// 登录
+/**
+ * 登录
+ * @param loginfield 登录类型
+ * @param questionid 安全提问类型
+ * @param username 用户名或者邮箱
+ * @param password 密码
+ * @param answer 答案
+ * @returns
+ */
 export function getLoginData(
   loginfield: string,
   questionid: string,
@@ -35,7 +44,7 @@ export function getLoginData(
   answer: string
 ): Promise<AxiosResponse<string, null>> {
   return axios({
-    url: "/member.php?mod=logging&action=login&loginsubmit=yes",
+    url: UrlConstants.login,
     method: 'get',
     params: {
       loginfield: loginfield,

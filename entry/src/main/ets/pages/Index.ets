@@ -1,7 +1,7 @@
 import { HomePage } from './home/HomePage';
 import { NoticePage } from './notice/NoticePage';
 import { ProfilePage } from './profile/ProfilePage';
-import { getResourceText } from '../common/utils/ResourceUtil'
+import { BottomTabsList } from '../model/IndexModel'
 
 @Entry
 @Component
@@ -14,32 +14,17 @@ struct Index {
       TabContent() {
         HomePage()
       }
-      .tabBar(this.TabBuilder(
-        getResourceText($r('app.string.tab_home')),
-        0,
-        $r("app.media.ic_tab_home_selected"),
-        $r("app.media.ic_tab_home_normal")
-      ))
+      .tabBar(this.TabBuilder(0))
 
       TabContent() {
         NoticePage()
       }
-      .tabBar(this.TabBuilder(
-        getResourceText($r('app.string.tab_notice')),
-        1,
-        $r("app.media.ic_tab_profile_selected"),
-        $r("app.media.ic_tab_profile_normal")
-      ))
+      .tabBar(this.TabBuilder(1))
 
       TabContent() {
         ProfilePage()
       }
-      .tabBar(this.TabBuilder(
-        getResourceText($r('app.string.tab_profile')),
-        2,
-        $r("app.media.ic_tab_notice_selected"),
-        $r("app.media.ic_tab_notice_normal")
-      ))
+      .tabBar(this.TabBuilder(2))
     }
     .height('100%')
     .onChange((index) => {
@@ -48,23 +33,19 @@ struct Index {
   }
 
   @Builder TabBuilder(
-    title: string,
-    targetIndex: number,
-    selectedImg: Resource,
-    normalImg: Resource
+    targetIndex: number
   ) {
     Column() {
-      Image(this.currentIndex === targetIndex ? selectedImg : normalImg)
+      Image(this.currentIndex === targetIndex ?
+      BottomTabsList[targetIndex].selectedIcon : BottomTabsList[targetIndex].normalIcon)
         .size({ width: 24, height: 24 })
-      Text(title)
-        .fontColor(this.currentIndex === targetIndex ? $r('app.color.app_theme_primary') : $r('app.color.app_tab_text'))
+
+      Text(BottomTabsList[targetIndex].text)
+        .fontColor(this.currentIndex === targetIndex ?
+        $r('app.color.app_theme_primary') : $r('app.color.app_tab_text'))
     }
     .width('100%')
     .height(50)
     .justifyContent(FlexAlign.Center)
-    .onClick(() => {
-      this.currentIndex = targetIndex;
-      this.tabsController.changeIndex(this.currentIndex);
-    })
   }
 }

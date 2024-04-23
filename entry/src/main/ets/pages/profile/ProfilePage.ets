@@ -1,5 +1,5 @@
 import router from '@ohos.router';
-import { PERCENT_100 } from '../../common/constants/CommonConstants';
+import { CommonConstants } from '../../common/constants/CommonConstants';
 import Logger from '../../common/utils/Logger';
 import UserInfo from '../../common/utils/UserCacheInfo'
 
@@ -43,11 +43,11 @@ export struct ProfilePage {
                 })
               })
           }
-          .height(PERCENT_100)
+          .height(CommonConstants.PERCENT_100)
           .justifyContent(FlexAlign.Center)
         }
       }
-      .height(PERCENT_100)
+      .height(CommonConstants.PERCENT_100)
       .title(getContext(this).resourceManager.getStringSync($r('app.string.tab_profile')))
       .titleMode(NavigationTitleMode.Mini)
       .hideBackButton(true)
