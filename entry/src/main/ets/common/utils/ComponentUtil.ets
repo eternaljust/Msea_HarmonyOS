@@ -1,9 +1,9 @@
-import { CommonConstants } from  '../constants/CommonConstants'
+import {  CommonConstants as Const } from  '../constants/CommonConstants'
 import promptAction from '@ohos.promptAction';
 
 export function showToast(msg: string | Resource) {
   promptAction.showToast({
     message: msg,
-    duration: CommonConstants.MESSAGE_DURATION
+    duration: Const.MESSAGE_DURATION
   });
 }

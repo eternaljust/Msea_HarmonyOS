@@ -23,6 +23,38 @@
     {
       "name": "tab_profile",
       "value": "我的"
+    },
+    {
+      "name": "login_title",
+      "value": "登录"
+    },
+    {
+      "name": "login_logged_in",
+      "value": "已登录"
+    },
+    {
+      "name": "login_input_placeholder",
+      "value": "请输入"
+    },
+    {
+      "name": "login_input_placeholder_password",
+      "value": "请输入密码"
+    },
+    {
+      "name": "login_input_placeholder_answer",
+      "value": "请输入答案"
+    },
+    {
+      "name": "login_safe_ask_question",
+      "value": "安全提问："
+    },
+    {
+      "name": "setting_title",
+      "value": "设置"
+    },
+    {
+      "name": "setting_logout",
+      "value": "退出登录"
     }
   ]
 }

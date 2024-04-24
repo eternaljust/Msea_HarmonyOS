@@ -1,5 +1,5 @@
-import { CommonConstants } from '../../common/constants/CommonConstants'
-import UserInfo from '../../common/utils/UserCacheInfo'
+import {  CommonConstants as Const } from '../../common/constants/CommonConstants'
+import { UserInfo } from '../../common/utils/UserCacheInfo'
 import router from '@ohos.router';
 import Logger from '../../common/utils/Logger';
 
@@ -20,7 +20,7 @@ struct SettingPage {
   }
 
   async refresh() {
-    let auth = await UserInfo.getAuth() as string;
+    let auth = await UserInfo.getInstance().getAuth() as string;
     this.isLogin = auth != '';
   }
 
@@ -29,22 +29,22 @@ struct SettingPage {
       Navigation() {
         Row() {
           if (!this.isLogin) {
-            Text('设置')
+            Text($r('app.string.setting_title'))
           } else {
-            Text('已登录')
+            Text($r('app.string.login_logged_in'))
 
-            Button('退出登录')
+            Button($r('app.string.setting_logout'))
               .onClick(() => {
-                UserInfo.setAuth('')
-                router.back()
+                UserInfo.getInstance().reset();
+                router.back();
               })
           }
         }
-        .width(CommonConstants.PERCENT_100)
+        .width(Const.PERCENT_100)
         .justifyContent(FlexAlign.SpaceAround)
       }
-      .height(CommonConstants.PERCENT_100)
-      .title('设置')
+      .height(Const.PERCENT_100)
+      .title($r('app.string.setting_title'))
       .titleMode(NavigationTitleMode.Mini)
     }
   }

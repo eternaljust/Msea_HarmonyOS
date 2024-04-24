@@ -1,13 +1,13 @@
 import router from '@ohos.router';
-import { CommonConstants } from '../../common/constants/CommonConstants';
-import UserInfo from '../../common/utils/UserCacheInfo'
+import {  CommonConstants as Const } from '../../common/constants/CommonConstants';
+import { UserInfo } from '../../common/utils/UserCacheInfo'
 import Logger from '../../common/utils/Logger';
+import { getResourceText } from '../../common/utils/ResourceUtil';
 
 @Entry
 @Component
 export struct NoticePage {
-  @State isLogin: boolean = true;
-  @State auth: string = '';
+  @State isLogin: boolean = false;
 
   onPageShow() {
     Logger.info('NoticePage onPageShow')
@@ -20,8 +20,7 @@ export struct NoticePage {
   }
 
   async refresh() {
-    let auth = await UserInfo.getAuth() as string;
-    this.auth = auth;
+    let auth = await UserInfo.getInstance().getAuth() as string;
     this.isLogin = auth != '';
   }
 
@@ -29,25 +28,24 @@ export struct NoticePage {
     Column() {
       Navigation() {
         if (this.isLogin) {
-          Text('已登录' + this.auth)
+          Text(getResourceText($r('app.string.login_logged_in')))
         } else {
           Column() {
-            Button('登录')
+            Button($r('app.string.login_title'))
               .backgroundColor($r('app.color.app_theme_primary'))
               .onClick(() => {
-                UserInfo.setAuth('12345678')
                 this.refresh()
                 router.pushUrl({
                   url: 'pages/profile/LoginPage'
                 })
               })
           }
-          .height(CommonConstants.PERCENT_100)
+          .height(Const.PERCENT_100)
           .justifyContent(FlexAlign.Center)
         }
       }
-      .height(CommonConstants.PERCENT_100)
-      .title(getContext(this).resourceManager.getStringSync($r('app.string.tab_notice')))
+      .height(Const.PERCENT_100)
+      .title($r('app.string.tab_notice'))
       .titleMode(NavigationTitleMode.Mini)
       .hideBackButton(true)
     }

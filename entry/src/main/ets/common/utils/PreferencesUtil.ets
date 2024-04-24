@@ -21,48 +21,54 @@ export class PreferencesUtil {
     return PreferencesUtil.instance;
   }
 
-  async initPreference(storeName: string) {
+  initPreference(storeName: string) {
     try {
-      this.preferences = await preferences.getPreferences(this.context, storeName)
+      let options: preferences.Options = { name: storeName }
+      this.preferences = preferences.getPreferencesSync(this.context, options);
     } catch (e) {
       Logger.error(TAG, `Failed to get preferences, error: ${JSON.stringify(e)}`);
     }
   }
 
-  async deletePreferences() {
+  put(key: string, value: preferences.ValueType) {
     try {
-      await preferences.deletePreferences(this.context, PREFERENCES_NAME);
-    } catch(e) {
-      Logger.error(TAG, `Failed to delete preferences, error: ${JSON.stringify(e)}`);
-    };
-  }
-
-  async put(key: string, value: preferences.ValueType) {
-    try {
-      await this.preferences?.put(key, value);
-      await this.preferences?.flush();
+      this.preferences?.putSync(key, value);
+      this.preferences?.flush();
+      Logger.info(TAG, `Succeeded set value: ${value} of key: ${key}.`);
     } catch (e) {
       Logger.error(TAG, `Failed put value of '${key}'. error: ${JSON.stringify(e)}`);
     }
   }
 
-  async get(key: string) {
+  get(key: string): preferences.ValueType {
     try {
-      let value = await this.preferences?.get(key, '');
+      let value = this.preferences?.getSync(key, '');
+      if (value == undefined) {
+        value = '';
+      }
       Logger.info(TAG, `Succeeded get value: ${value} of key: ${key}.`);
-      return value
+      return value;
     } catch (e) {
       Logger.error(TAG, `Failed get value of '${key}'. error: ${JSON.stringify(e)}`);
-      return ''
+      return '';
     }
   }
 
-  async delete(key: string) {
+  delete(key: string) {
     try {
-      await this.preferences?.delete(key);
-      await this.preferences?.flush();
+      this.preferences?.deleteSync(key);
+      this.preferences?.flush();
     } catch (e) {
       Logger.error(TAG, `Failed delete value of '${key}'. error: ${JSON.stringify(e)}`);
+    }
+  }
+
+  clear() {
+    try {
+      this.preferences?.clearSync();
+      this.preferences?.flush();
+    } catch (e) {
+      Logger.error(TAG, `Failed clear preferences. error: ${JSON.stringify(e)}`);
     }
   }
 }

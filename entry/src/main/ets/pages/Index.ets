@@ -27,6 +27,7 @@ struct Index {
       .tabBar(this.TabBuilder(2))
     }
     .height('100%')
+    .scrollable(false)
     .onChange((index) => {
       this.currentIndex = index;
     })

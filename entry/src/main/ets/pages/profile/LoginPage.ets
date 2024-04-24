@@ -1,9 +1,11 @@
-import { CommonConstants } from '../../common/constants/CommonConstants'
+import {  CommonConstants as Const } from '../../common/constants/CommonConstants'
 import { showToast } from '../../common/utils/ComponentUtil';
 import { LoginFieldItem, LoginQuestionItem } from '../../model/LoginModel'
 import router from '@ohos.router';
 import { BindMenuNormalItem } from '../../view/Widget'
 import { loginViewModel } from '../../viewmodel/LoginViewModel';
+import { getResourceText } from '../../common/utils/ResourceUtil'
+import { UserInfo } from '../../common/utils/UserCacheInfo'
 
 @Entry
 @Component
@@ -25,20 +27,23 @@ struct LoginPage {
             Text(`${LoginFieldItem.title(this.loginItem)} ▼`)
               .bindMenu(this.getLoginItems())
           }
-          .width(CommonConstants.PERCENT_100)
+          .width(Const.PERCENT_100)
           .justifyContent(FlexAlign.Start)
 
-          TextInput({placeholder: `请输入${LoginFieldItem.title(this.loginItem)}`})
+          TextInput({
+            placeholder:
+            `${getResourceText($r('app.string.login_input_placeholder'))}${LoginFieldItem.title(this.loginItem)}`
+          })
             .margin({ top: $r('app.float.margin_padding_10') })
             .onChange(value => (this.username = value))
 
-          TextInput({placeholder: '请输入密码'})
+          TextInput({ placeholder: getResourceText($r('app.string.login_input_placeholder_password')) })
             .margin({ top: $r('app.float.margin_padding_10') })
             .type(InputType.Password)
             .onChange((value) => this.password = value)
 
           Row() {
-            Text('安全提问：')
+            Text($r('app.string.login_safe_ask_question'))
 
             Button(`${LoginQuestionItem.title(this.questionItem)}`)
               .fontColor($r('app.color.app_theme_primary'))
@@ -48,19 +53,19 @@ struct LoginPage {
               .height(30)
               .bindMenu(this.getQuestionItems())
           }
-          .width(CommonConstants.PERCENT_100)
+          .width(Const.PERCENT_100)
           .margin({ top: $r('app.float.margin_padding_10') })
 
           if (this.questionItem != LoginQuestionItem.NO) {
-            TextInput({placeholder: '请输入答案'})
+            TextInput({ placeholder: getResourceText($r('app.string.login_input_placeholder_answer')) })
               .margin({ top: $r('app.float.margin_padding_10') })
               .onChange(value => this.answer = value)
           }
 
-          Button('登录')
+          Button($r('app.string.login_title'))
             .backgroundColor($r('app.color.app_theme_primary'))
             .margin({ top: $r('app.float.margin_padding_10')})
-            .width(CommonConstants.PERCENT_100)
+            .width(Const.PERCENT_100)
             .enabled(this.username.length != 0 && this.password.length != 0)
             .onClick(() => this.login())
         }
@@ -69,11 +74,11 @@ struct LoginPage {
 
         Blank()
       }
-      .height(CommonConstants.PERCENT_100)
+      .height(Const.PERCENT_100)
     }
-    .width(CommonConstants.PERCENT_100)
-    .height(CommonConstants.PERCENT_100)
-    .title('登录')
+    .width(Const.PERCENT_100)
+    .height(Const.PERCENT_100)
+    .title($r('app.string.login_title'))
     .titleMode(NavigationTitleMode.Mini)
   }
 
@@ -110,8 +115,9 @@ struct LoginPage {
     );
 
     if (result[0]) {
-      router.back()
+      UserInfo.getInstance().setAuth('123456');
+      router.back();
     }
-    showToast(result[1])
+    showToast(result[1]);
   }
 }
