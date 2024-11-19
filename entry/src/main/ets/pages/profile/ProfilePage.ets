@@ -52,11 +52,11 @@ export struct ProfilePage {
       .menus([
         {
           value: '',
-          icon: '../../../resources/base/media/ic_settings_filled.svg',
+          icon: 'resources/base/media/ic_profile_settings.svg',
           action: () => {
             router.pushUrl({
               url: 'pages/profile/SettingPage'
-            })
+            });
           }
         }
       ])
