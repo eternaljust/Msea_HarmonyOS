@@ -5,7 +5,9 @@
       {
         "name": "default",
         "signingConfig": "default",
-        "compatibleSdkVersion": "5.0.0(12)",
+        "compileSdkVersion": "6.0.1(21)",     // 编译应用工程的SDK版本，该字段决定了应用开发过程中联想的API范围和使用的工具链版本。
+        "targetSdkVersion": "6.0.1(21)",      // 应用运行的目标SDK版本。针对系统侧进行API版本隔离的变更，应用在终端设备上运行时会呈现以targetSdkVersion版本为目标版本的行为
+        "compatibleSdkVersion": "6.0.0(20)",  // 最低兼容版本同步升级
         "runtimeOS": "HarmonyOS",
       }
     ]
